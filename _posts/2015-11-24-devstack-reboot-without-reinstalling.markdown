@@ -28,9 +28,15 @@ devstack这么做的目的是认为虚拟机的环境会发生各种变化，所
 
 ## 实际配置
 
+首先禁止stack.sh做任何事情。
+
 {% highlight bash %}
 sed -i  '1a exit 0'  /opt/stack/devstack/stack.sh  # 禁止stack.sh做任何事情
+{% endhighlight %}
 
+然后重启系统，重启后按下面的脚本恢复服务。
+
+{% highlight bash %}
 cd /etc/apache2/sites-enabled && sudo ln -s ../sites-available/keystone.conf  .  # 重新启用 keystone 的apache 配置
 
 # 重启各种服务
